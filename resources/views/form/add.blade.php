@@ -5,13 +5,12 @@
         <div class="row g-3">
             <div class="col-12">
                 <label for="ormawa" class="form-label">Ormawa</label>
-                <select class="form-select @error('ormawa') is-invalid                                      
+                <select class="form-select @error('ormawa') is-invalid                           
             @enderror" name="ormawa" required>
                     <option value=""> </option>
                     @foreach ($ormawa as $data)
                     <option value="{{$data->ID}}">{{$data->nama_omawa}}</option>
                     @endforeach
-                    <input type="hidden" name="uid" value="{{$data->UID}}">
                 </select>
                 @error('ormawa')
                 <div class=" invalid-feedback">
@@ -61,7 +60,7 @@
                 <select class="form-select @error('skim_kegiatan') is-invalid @enderror" name="skim_kegiatan" required>
                     <option value=""> </option>
                     @foreach ($skim as $data)
-                    <option value="{{$data->id_skim}}">{{$data->nama_skim}}</option>
+                    <option value="{{$data->ID}}">{{$data->nama_skim}}</option>
                     @endforeach
                 </select>
                 @error('skim_kegiatan')

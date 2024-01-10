@@ -1,16 +1,23 @@
-@extends('layout.page')
+@extends('layouts.app')
 
 @section('content')
-<section class="begin">
-    <div class="container py-4">
-        <div class="container bg-dark d-flex w-100 h-100 p-3 mx-auto flex-column">
-            <div class="row justify-content-center align-items-center">
-                <main class="col-md-6 p-3 text-center text-white rounded-25">
-                    <h1>Pendataan Ormawa Universitas Sebelas Maret</h1>
-                </main>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+
+                    {{ __('You are normal user') }}
+                </div>
             </div>
         </div>
-
     </div>
-</section>
+</div>
 @endsection

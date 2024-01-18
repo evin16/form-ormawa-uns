@@ -12,6 +12,7 @@ use App\Models\TargetProker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 
@@ -24,6 +25,23 @@ class UserController extends Controller
             ->where('users.ormawa', '=', $account)
             ->get(['users.*', 'ormawa.nama_ormawa']);
         return view('user.index', compact('name'));
+    }
+
+    public function profile()
+    {
+        $account = (Auth::user()->ormawa);
+        $user = User::where('ormawa', $account)->join('ormawa', 'ormawa.id', '=', 'users.ormawa')->get();
+        return view('user.profile', compact('user'));
+    }
+
+    public function change(Request $request)
+    {
+        $account = (Auth::user()->id);
+        $user = User::find($account);
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->update();
+        return redirect()->route('user.profile')->with('status', 'Data has been uploaded');
     }
 
     public function show()

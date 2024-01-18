@@ -47,6 +47,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware('auth')->group(function () {
     // User
     Route::get('user/home', [UserController::class, 'index'])->name('user.index');
+    Route::get('user/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::patch('user/profile', [UserController::class, 'change'])->name('user.change.profile');
     Route::get('user/show', [UserController::class, 'show'])->name('user.show');
     Route::get('user/insert', [UserController::class, 'insert'])->name('user.insert');
     Route::post('user/insert', [UserController::class, 'store'])->name('user.store');

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 
@@ -58,10 +59,10 @@ class UserController extends Controller
     public function insert()
     {
         $account = (Auth::user()->ormawa);
-
         $ormawa = Ormawa::where('ormawa.id', '=', $account)->get(['ormawa.*']);
         $skim = Skim::all();
-        return view('user.insert', ['ormawa' => $ormawa, 'skim' => $skim]);
+        $mahasiswa = Mahasiswa::select()->get('nama', 'nim');
+        return view('user.insert', ['ormawa' => $ormawa, 'skim' => $skim, 'mahasiswa' => $mahasiswa]);
     }
 
     public function store(Request $request)
@@ -83,8 +84,7 @@ class UserController extends Controller
         ]);
 
         $dana = implode(', ', $request->input('dana'));
-        $mahasiswa = Mahasiswa::where('nim', $request->input('nim'))->get(['nama']);
-
+        $mahasiswa = Mahasiswa::where('nim', $request->input('nim'))->value('nama');
         $proker = new Proker();
         $proker->ormawa = $request->input('ormawa');
         $proker->jenis_kegiatan = $request->input('jenis');
@@ -119,6 +119,42 @@ class UserController extends Controller
         $proker = Proker::find($id);
         $targetproker = TargetProker::find($id);
         return view('user.info', compact('proker', 'targetproker'));
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $mahasiswa = $request->input('search');
+            $data = Mahasiswa::where('nim', $mahasiswa)->get();
+            $output = '';
+            if (count($data) > 0) {
+                $output = '
+                <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">NIM</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Angkatan</th>
+                </tr>
+                </thead>
+                <tbody>';
+                foreach ($data as $row) {
+                    $output .= '
+                        <tr>
+                        <th scope="row">' . $row->nim . '</th>
+                        <td>' . $row->nama . '</td>
+                        <td>' . $row->angkatan . '</td>
+                        </tr>
+                        ';
+                }
+                $output .= '
+                 </tbody>
+                </table>';
+            } else {
+                $output .= 'No results';
+            }
+            return $output;
+        }
     }
 
     public function detail(Request $request, $id)

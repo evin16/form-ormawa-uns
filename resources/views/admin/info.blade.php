@@ -211,6 +211,34 @@
                             @endif
                         </tr>
                     </table>
+
+                    <button type="button" class="btn btn-primary btn-sm float-end rounded" data-bs-toggle="modal" data-bs-target="#final">
+                        <span>Finalisasi Data</span>
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="final" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Notifikasi Finalisasi</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{route('admin.final', [$targetproker->id])}}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <p>Apakah data {{$proker->name}} sudah final?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        Benar
+                                    </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

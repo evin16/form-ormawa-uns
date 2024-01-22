@@ -12,7 +12,10 @@
                 <div class="card-header">
                     <div class="d-grid-flex">
                         {{ __('Halaman Program Kerja Ormawa') }}
-                        <a href="{{route('user.insert')}}" class="btn btn-primary btn-sm float-end" class=""> <i class="bi bi-plus-lg"></i> </a>
+                        <a href="{{route('user.insert')}}" class="btn btn-primary btn-sm float-end" class=""> <i
+                                class="bi bi-plus-lg"></i> </a>
+                        <a href="https://uns.id/RABormawaUNS" class=" btn btn-success btn-sm float-end mx-2"
+                            target="_blank"> <i class="bi bi-cash-coin"></i> </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -45,9 +48,12 @@
                                 <td><span class="small">@currency($data->jumlah_dana)</span></td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        <a href="{{route('user.info', [$data->id])}}" class="btn btn-sm btn-primary text white"> <i class="bi bi-info-circle"></i>
+                                        <a href="{{route('user.info', [$data->id])}}"
+                                            class="btn btn-sm btn-primary text white"> <i class="bi bi-info-circle"></i>
                                         </a>
-                                        <a href="{{route('user.edit', [$data->id])}}" class="btn btn-sm btn-primary text white"> <i class="bi bi-pencil-square"></i>
+                                        <a href="{{route('user.edit', [$data->id])}}"
+                                            class="btn btn-sm btn-warning text white"> <i
+                                                class="bi bi-pencil-square"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -62,9 +68,9 @@
 </div>
 
 <script>
-    $('#data').DataTable({
-        responsive: true
-    });
+$('#data').DataTable({
+    responsive: true
+});
 </script>
 
 @endsection

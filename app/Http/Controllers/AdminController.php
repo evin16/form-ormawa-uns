@@ -151,7 +151,7 @@ class AdminController extends Controller
 
     public function update(Request $request, $id)
     {
-        $mahasiswa = Mahasiswa::where('nim', $request->input('nim'))->get(['nama']);
+        $mahasiswa = Mahasiswa::where('nim', $request->input('nim'))->value('nama');
         $dana = implode(', ', $request->input('dana'));
         $update = Proker::find($id);
         $update->nama_kegiatan = $request->input('title');
@@ -181,14 +181,22 @@ class AdminController extends Controller
         return redirect()->route('admin.show')->with('success', 'Update Successful');;
     }
 
+    public function final($id)
+    {
+        $targetproker = TargetProker::find($id);
+        $targetproker->status = 'final';
+        $targetproker->update();
+        return redirect()->back()->with('status', 'Data telah terfinalisasi');
+    }
+
     public function destroy($id)
     {
-        $assets = Asset::find($id);
-        $destination = 'uploads/maps/' . $assets->filename;
-        if (File::exists($destination)) {
-            File::delete($destination);
+        $proker = Proker::find($id);
+        $fileRAB = 'uploads/maps/' . $proker->filename;
+        if (File::exists($fileRAB)) {
+            File::delete($fileRAB);
         }
-        $assets->delete();
+        $proker->delete();
         return redirect()->back()->with('status', 'Data Deleted Successfully');
     }
 }

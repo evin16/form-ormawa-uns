@@ -99,11 +99,11 @@ class UserController extends Controller
         $proker->selesai = $request->input('end');
         $proker->sumber_dana = $dana;
         $proker->jumlah_dana = $request->input('jumlah');
-        if ($request->hasfile('RABfile')) {
+        if ($request->file('RABfile') != null) {
             $file = $request->file('RABfile');
             $extention = $file->getClientOriginalExtension();
             $proker->filenames = $filename = time() . '.' . $extention;
-            $file->move('uploads/RAB/', $filename);
+            $file->storeAs('uploads/RAB/', $filename);
         }
         $proker->save();
 
@@ -224,7 +224,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $dana = implode(', ', $request->input('dana'));
-        $mahasiswa = Mahasiswa::where('nim', $request->input('nim'))->get(['nama']);
+        $mahasiswa = Mahasiswa::where('nim', $request->input('nim'))->value('nama');
 
         $update = Proker::find($id);
         $update->nama_kegiatan = $request->input('title');
@@ -247,7 +247,7 @@ class UserController extends Controller
             $file = $request->file('dokumen');
             $extention = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extention;
-            $file->move('uploads/RAB/', $filename);
+            $file->storeAs('uploads/RAB/', $filename);
             $update->filenames = $filename;
         }
         $update->update();

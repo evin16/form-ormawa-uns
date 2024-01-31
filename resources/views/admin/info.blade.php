@@ -72,7 +72,7 @@
                         </tr>
                         <tr>
                             <td>Sumber Dana</td>
-                            <td><a href="{{ asset('uploads/RAB/'.$proker->filenames) }}" class="badge text-bg-primary link-underline-primary" target="_blank"> file RAB</a>
+                            <td><a href="{{ asset('storage/'.$proker->filenames) }}" class="badge text-bg-primary link-underline-primary" target="_blank"> file RAB</a>
                             </td>
                         </tr>
                     </table>

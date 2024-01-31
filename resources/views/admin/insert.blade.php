@@ -168,8 +168,9 @@
 
                                     <div class="row mb-2">
                                         <div class="col-sm">
-                                            <label for="jumlah" class="form-label fw-bolder">Jumlah Dana</label>
-                                            <input type="text" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah">
+                                            <label for="jumlah" class="form-label fw-bolder">Jumlah Dana</label> <br>
+                                            <small class="text-secondary"><i>*Nominal tanpa ada tanda baca</i></small>
+                                            <input type="text" class="form-control @error('jumlah') is-invalid @enderror mt-2" name="jumlah" placeholder="5000000">
                                             @error('jumlah')
                                             <div class="invalid-feedback">
                                                 Jumlah Dana kegiatan belum dicantumkan!
@@ -177,8 +178,13 @@
                                             @enderror
                                         </div>
                                         <div class="col-sm">
-                                            <label for="rab" class="form-label fw-bolder">RAB Kegiatan</label>
-                                            <input class="form-control @error('RABfile') is-invalid @enderror" type="file" name="RABfile">
+                                            <label for="rab" class="form-label fw-bolder">RAB Kegiatan</label> <br>
+                                            <small class="text-secondary"><i>* untuk template RAB dapat dilihat
+                                                    <a href="https://uns.id/RABormawaUNS" class="badge bg-success text-decoration-none" target="_blank">
+                                                        disini
+                                                    </a>
+                                                </i></small>
+                                            <input class="form-control @error('RABfile') is-invalid @enderror mt-2" type="file" name="RABfile">
                                             @error('RABfile')
                                             <div class="invalid-feedback">
                                                 File RAB kegiatan belum dicantumkan!

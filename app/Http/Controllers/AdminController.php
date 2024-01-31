@@ -56,8 +56,7 @@ class AdminController extends Controller
         ]);
 
         $dana = implode(', ', $request->input('dana'));
-        $mahasiswa = Mahasiswa::where('nim', $request->input('nim'))->get(['nama']);
-
+        $mahasiswa = Mahasiswa::where('nim', $request->input('nim'))->value('nama');
         $proker = new Proker();
         $proker->ormawa = $request->input('ormawa');
         $proker->jenis_kegiatan = $request->input('jenis');
@@ -72,11 +71,11 @@ class AdminController extends Controller
         $proker->selesai = $request->input('end');
         $proker->sumber_dana = $dana;
         $proker->jumlah_dana = $request->input('jumlah');
-        if ($request->hasfile('RABfile')) {
+        if ($request->hasFile('RABfile')) {
             $file = $request->file('RABfile');
             $extention = $file->getClientOriginalExtension();
             $proker->filenames = $filename = time() . '.' . $extention;
-            $file->move('uploads/RAB/', $filename);
+            $file->storeAs('/uploads/RAB', $filename, ['disk' => 'public']);
         }
         $proker->save();
 
@@ -174,7 +173,7 @@ class AdminController extends Controller
             $file = $request->file('dokumen');
             $extention = $file->getClientOriginalExtension();
             $filename = time() . '.' . $extention;
-            $file->move('uploads/RAB/', $filename);
+            $file->storeAs('uploads/RAB/', $filename, ['disk' => 'public']);
             $update->filenames = $filename;
         }
         $update->update();

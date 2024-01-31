@@ -3,14 +3,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Template Evaluasi Ormawa Universitas Sebelas Maret</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
-    hr {
-        border: solid 1px black;
-        color: #FFFF00;
-        height: 1px;
-    }
+        hr {
+            border: solid 1px black;
+            color: #FFFF00;
+            height: 1px;
+        }
     </style>
 </head>
 
@@ -18,7 +17,7 @@
     <div class="col">
         <table class="table  text-center">
             <td class='w-25'>
-                <img src="{{ public_path('img/logo-uns.png') }}" style="width: 100%;">
+                <img src="{{ asset('img/logo-uns.png') }}" style="width: 100%;">
             </td>
             <td class="mx-auto pt-3">
                 <p>KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, <br> RISET DAN TEKNOLOGI <br> <b>UNIVERSITAS SEBELAS MARET</b>
@@ -261,13 +260,13 @@
         </table>
         @endforeach
 
-        <div class="d-grid d-md-flex mt-3">
+        <div class="d-grid d-md-flex my-5">
             <div class="row">
                 @foreach ($proker as $data)
                 <table class="text-center">
                     <tr>
                         <td><label for="">Verifikasi Reviewer</label></td>
-                        <td><label for="">Surakarta, &nbsp;&nbsp;&nbsp;&nbsp; Januari 2024</label>
+                        <td><label for="">Surakarta, &nbsp;&nbsp;&nbsp;&nbsp; Januari 2024 <br> Ketua Pelaksana</label>
                         </td>
                     </tr>
                     <tr>
@@ -288,9 +287,9 @@
 
                 @endforeach
             </div>
-            <div class="col text-center mt-3">
+            <div class="col text-center mt-5">
                 <p>Mengetahui, <br>
-                    Biro Akademik dan Kemahasiswaan
+                    Kepala Biro Akademik dan Kemahasiswaan
                 </p>
                 <br><br><br><br><br>
                 <p>

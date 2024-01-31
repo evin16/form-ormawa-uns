@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;

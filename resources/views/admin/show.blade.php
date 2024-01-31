@@ -9,10 +9,7 @@
                 <div class="card-header">
                     <div class="d-grid-flex">
                         {{ __('Halaman Evaluasi Kegiatan Ormawa UNS') }}
-                        <a href="{{route('admin.insert')}}" class="btn btn-primary btn-sm float-end" class=""> <i
-                                class="bi bi-plus-lg"></i> </a>
-                        <a href="https://uns.id/RABormawaUNS" class=" btn btn-primary btn-sm float-end mx-2"
-                            target="_blank"> <i class="bi bi-cash-coin"></i> </a>
+                        <a href="{{route('admin.insert')}}" class="btn btn-primary btn-sm float-end" class=""> <i class="bi bi-plus-lg"></i> </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -45,43 +42,18 @@
                                 <td><span class="small">@currency($data->jumlah_dana)</span></td>
                                 <td>
                                     <div class="d-flex gap-2">
-                                        <a href="{{route('admin.info', [$data->id])}}"
-                                            class="btn btn-sm btn-primary text white"> <i class="bi bi-info-circle"></i>
+                                        <a href="{{route('admin.info', [$data->id])}}" class="btn btn-sm btn-primary text white"> <i class="bi bi-info-circle"></i>
                                         </a>
-                                        <a href="{{route('admin.edit', [$data->id])}}"
-                                            class="btn btn-sm btn-warning text white"> <i
-                                                class="bi bi-pencil-square"></i>
+                                        <a href="{{route('admin.edit', [$data->id])}}" class="btn btn-sm btn-warning text white"> <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#delete">
-                                            <i class="bi bi-trash2-fill"></i>
-                                        </button>
+                                        <form method="POST" action="{{ route('admin.destroy', $data->id) }}">
+                                            @csrf
+                                            <input name="_method" type="hidden" value="DELETE">
+                                            <button type="submit" class="btn btn-sm btn-danger show_confirm" data-toggle="tooltip" title='Delete'> <i class="bi bi-trash2-fill"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
-                                <!-- Modal -->
-                                <div class="modal fade" id="delete" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Notifikasi</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{ route('admin.destroy', [$data->id]) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <p>Apakah akan menghapus data {{$data->name}}?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    Hapus
-                                                </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </tr>
                             @endforeach
                         </tbody>
@@ -93,8 +65,30 @@
 </div>
 
 <script>
-$('#data').DataTable({
-    responsive: true
-});
+    $('#data').DataTable({
+        responsive: true
+    });
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script type="text/javascript">
+    $('.show_confirm').click(function(event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+    });
+</script>
+
 @endsection
